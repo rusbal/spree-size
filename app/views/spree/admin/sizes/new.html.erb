@@ -1,0 +1,13 @@
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @size } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:sizes), spree.admin_sizes_url %> /
+  <%= Spree.t(:new_size) %>
+<% end %>
+
+<%= form_for [:admin, @size] do |f| %>
+  <fieldset data-hook="new_size">
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

@@ -13,4 +13,6 @@ gem 'rails-controller-testing'
 gem 'rubocop', require: false
 gem 'rubocop-rspec', require: false
 
+gem 'image_processing', '~> 1.2'
+
 gemspec
