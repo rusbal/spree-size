@@ -17,9 +17,20 @@ namespace :spree_sizes do
     raise "Aborting action." unless input == confirm_token
 
     Spree::Size.all.each do |size|
-      # size.video.purge if size.video.attached? and not size.video.nil?
-      # size.image.purge if size.image.attached? and not size.image.nil?
-      puts " . purged media on #{size.name}"
+      was_purged = false
+      if size.video.attached?
+        unless size.video.nil?
+          size.video.purge
+          was_purged = true
+        end
+      end
+      if size.image.attached?
+        unless size.image.nil?
+          size.image.purge
+          was_purged = true
+        end
+      end
+      puts " . purged media on #{size.name}" if was_purged
     end
   end
 
