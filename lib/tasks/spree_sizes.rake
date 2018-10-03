@@ -19,13 +19,17 @@ namespace :spree_sizes do
     Spree::Size.all.each do |size|
       was_purged = false
       if size.video.attached?
+        puts " . #{size.name} has video attachment."
         unless size.video.nil?
+          puts " . #{size.name} video is not nil."
           size.video.purge
           was_purged = true
         end
       end
       if size.image.attached?
+        puts " . #{size.name} has image attachment."
         unless size.image.nil?
+          puts " . #{size.name} image is not nil."
           size.image.purge
           was_purged = true
         end
