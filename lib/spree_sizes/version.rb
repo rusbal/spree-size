@@ -10,7 +10,7 @@ module SpreeSizes
   module VERSION
     MAJOR = 0
     MINOR = 0
-    TINY  = 104
+    TINY  = 105
     PRE   = 'alpha'.freeze
 
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
