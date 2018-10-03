@@ -6,4 +6,9 @@ module Spree::Admin::SizesHelper
   def show_video(file)
     video_tag(main_app.url_for(file), controls: true)
   end
+
+  def size_products_count(size, on_zero = '-')
+    count = size.products.count
+    count === 0 ? on_zero : count
+  end
 end
