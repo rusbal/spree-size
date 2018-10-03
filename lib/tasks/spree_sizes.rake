@@ -14,11 +14,11 @@ namespace :spree_sizes do
     confirm_token = rand(36**6).to_s(36)
     STDOUT.puts "Confirm purging of video and image from sizes? Enter '#{confirm_token}' to confirm:"
     input = STDIN.gets.chomp
-    raise "Aborting [ACTION]. You entered #{input}" unless input == confirm_token
+    raise "Aborting action." unless input == confirm_token
 
     Spree::Size.all.each do |size|
-      size.video.purge unless size.video.nil?
-      size.image.purge unless size.image.nil?
+      size.video.purge if size.video.attached?
+      size.image.purge if size.image.attached?
       puts " . purged media on #{size.name}"
     end
   end
