@@ -18,13 +18,10 @@ class CreateSpreeProductSizes < ActiveRecord::Migration[5.2]
   end
 
   def copy_media
-    return if sample_media_row.nil?
+    Rake::Task['spree_sizes:copy_media'].invoke
 
-    Spree::Size.all.each do |size|
-      size.video = sample_media_row.video if size.video.nil?
-      size.image = sample_media_row.image if size.image.nil?
-      size.save
-      puts " . saved media to #{product.name}"
+    if !($?.success?)
+      raise "Failed at spree_sizes:copy_media"
     end
   end
 
@@ -39,10 +36,6 @@ class CreateSpreeProductSizes < ActiveRecord::Migration[5.2]
       end
       puts " . attached size to #{product.name}"
     end
-  end
-
-  def sample_media_row
-    @sample_media_row ||= Spree::Size::order('name').where.not(video: [nil, ""]).first
   end
 
   def size_with_name_sizes
